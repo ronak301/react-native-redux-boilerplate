@@ -1,0 +1,28 @@
+{
+  "name": "AwesomeProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "test": "mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
+  },
+  "dependencies": {
+    "react": "^0.14.8",
+    "react-native": "^0.24.1",
+    "react-native-router-flux": "^3.22.23",
+    "react-native-video": "^0.7.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-persist": "^3.1.1",
+    "redux-thunk": "^2.1.0",
+    "remote-redux-devtools": "^0.3.2"
+  },
+  "devDependencies": {
+    "babel-register": "^6.8.0",
+    "flow-bin": "^0.22",
+    "mocha": "^2.4.5",
+    "redux-devtools": "^3.2.0"
+  }
+}
