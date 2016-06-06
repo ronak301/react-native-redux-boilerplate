@@ -22,7 +22,7 @@ class App extends Component {
         <Scene key="root">
           <Scene key="login" component={Login} title="Login" hideNavBar = {true}/>
           <Scene key="register" component={Register}  title="Register"/>
-          <Scene key="counter" component={Counter} title="Counter"/>
+          <Scene key="counter" initial={true} component={Counter} title="Counter"/>
          </Scene>
       </ReduxRouter>
     );

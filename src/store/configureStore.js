@@ -6,14 +6,12 @@ import thunk from'redux-thunk'
 import reducers from '../reducers'
 import {persistStore, autoRehydrate} from 'redux-persist'
 import {AsyncStorage} from 'react-native'
+import promiseMiddleware from 'redux-promise';
 
-var middleware = applyMiddleware(thunk);
+var middleware = applyMiddleware([thunk,promiseMiddleware]);
 
 function configureStore(onComplete) {
-  const initialState = {
-    count  : 0
-  }
-  const store = createStore(reducers , {counter : {count : 0} } , applyMiddleware(thunk));
+  const store = createStore(reducers , {} , applyMiddleware(thunk));
   persistStore(store, {storage: AsyncStorage}, onComplete);
   return store;
 }

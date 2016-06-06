@@ -12,6 +12,12 @@ import { createStore } from 'redux'
 import configureStore from './store/configureStore'
 import App from './app'
 
+const theme = {
+  tabbar: {
+    height: 50
+  }
+}
+
 class Root extends Component {
   constructor() {
     super();
@@ -30,6 +36,16 @@ class Root extends Component {
       </Provider>
     )
   }
+
+getChildContext () {
+ return {
+		theme : theme
+ 	}
 }
+}
+
+Root.childContextTypes = {
+	theme : React.PropTypes.object
+ }
 
 module.exports = Root;

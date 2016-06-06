@@ -5,12 +5,16 @@ import React, {
   Text,
   TouchableHighlight,
   View,
-  PropTypes
+  PropTypes,
+  Image
 } from 'react-native';
 
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
 
+import {increaseAction, decreaseAction, fetchData} from '../actions/counter'
+
+const url = 'http://ip.jsontest.com/';
 const styles = StyleSheet.create({
   container : {
     flex:1,
@@ -20,19 +24,19 @@ const styles = StyleSheet.create({
 });
 
 class CounterComponent extends Component {
-  props : {
-    value : PropTypes.func,
-    onIncreaseClick : PropTypes.func,
-    onDecreaseClick : PropTypes.func
-  }
 
   render () {
+    var {store,theme} = this.context;
+    store.dispatch(fetchData(url)).then(data => console.log(data));
     const { value,onIncreaseClick,onDecreaseClick } = this.props;
     return (
       <View style={styles.container}>
+        <Image
+          style={{height: 100 , width:100}}
+          source={require('../assets/example.svg')} />
         <Text>{value}</Text>
         <Text onPress = {onIncreaseClick}>+</Text>
-          <Text onPress = {onDecreaseClick}>-</Text>
+        <Text onPress = {onDecreaseClick}>-</Text>
       </View>
     );
   }
@@ -43,22 +47,23 @@ CounterComponent.propTypes = {
   onDecreaseClick : PropTypes.func.isRequired
 }
 
-const increaseAction = {type:'INCREAMENT'}
-const decreaseAction = {type:'DECREAMENT'}
+CounterComponent.contextTypes = {
+  store: React.PropTypes.object
+}
 
-const mapStateToProps = ({counter:{count}}) => {
+const mapStateToProps = (state) => {
   return {
-    value: count
+    value: state.counter.count
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onIncreaseClick : () => {
-      dispatch(increaseAction)
+      dispatch(increaseAction())
     },
     onDecreaseClick : () => {
-      dispatch(decreaseAction)
+      dispatch(decreaseAction())
     }
   }
 }
